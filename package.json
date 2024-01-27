@@ -1,0 +1,16 @@
+{
+  "name": "criando_tipos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "npm run den"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typecript": "^0.0.1-security"
+  }
+}
