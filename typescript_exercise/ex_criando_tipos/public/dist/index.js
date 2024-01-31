@@ -17,3 +17,11 @@ function updateSituation(situation, planet) {
     planet.situation = situation;
     alert(`A situação do planeta ${planet.name} foi atualizada para ${situation}`);
 }
+function addSatellite(name, planet) {
+    planet.satellites.push(name);
+    alert(`O satellite ${name} foi adicionado ao planeta ${planet.name}`);
+}
+function removeSatellite(name, planet) {
+    planet.satellites = planet.satellites.filter(satellite => satellite !== name);
+    alert(`O satellite ${name} foi removido do planeta ${planet.name}`);
+}
