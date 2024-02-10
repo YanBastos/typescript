@@ -78,3 +78,13 @@ function promptValidSituation() {
         }
     }
 }
+
+
+function promptValidPlanet(callbackfn: (planet: Planet) => void) {
+    const planetName= prompt('Informe o nome do planeta')
+    const planet = findPlanet(planetName)
+
+    if (planet === null) {
+        callbackfn(planet)
+    } else { alert("Planeta não encontrado") }
+}
