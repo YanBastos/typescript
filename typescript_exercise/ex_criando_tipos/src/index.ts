@@ -24,9 +24,9 @@ function addPlanet(name: string, cordinates: PlanetCordinates, situation: Planet
 
 function findPlanet(name: string) {
     const planet = planets.find(planet => planet.name === name)
-  
+
     return planet ?? false
-  }
+}
 
 function updateSituation(situation: PlanetSituation, planet: Planet) {
     planet.situation = situation
@@ -80,11 +80,31 @@ function promptValidSituation() {
 }
 
 
-function promptValidPlanet(callbackfn: (planet: Planet) => void) {
-    const planetName= prompt('Informe o nome do planeta')
+function promptValidPlanet(callback: (planet: Planet) => void) {
+    const planetName = prompt('Informe o nome do planeta:')
     const planet = findPlanet(planetName)
 
     if (planet) {
-        callbackfn(planet)
-    } else { alert("Planeta não encontrado") }
+        callback(planet)
+    } else {
+        alert('Planeta não encontrado! Retornando ao menu...')
+    }
+}
+
+function firstMenuOption() {
+    const name = prompt('informe o nome do planeta:')
+    const coordinateA = Number(prompt('Informe a primeira coordenada:'))
+    const coordinateB = Number(prompt('Informe a segunda coordenada:'))
+    const coordinateC = Number(prompt('Informe a terceira coordenada:'))
+    const coordinateD = Number(prompt('Informe a quarta coordenada:'))
+
+    const situation = promptValidSituation()
+
+    const confirmation = confirm(`Confirma o registro do planeta ${name}?
+    Coordenadas: (${coordinateA}, ${coordinateB}, ${coordinateC}, ${coordinateD})
+    Situação: ${situation}`)
+
+    if(confirmation) {
+        addPlanet(name, [coordinateA, coordinateB, coordinateC, coordinateD], situation)
+    }
 }
