@@ -24,9 +24,9 @@ function addPlanet(name: string, cordinates: PlanetCordinates, situation: Planet
 
 function findPlanet(name: string) {
     const planet = planets.find(planet => planet.name === name)
-
+  
     return planet ?? false
-}
+  }
 
 function updateSituation(situation: PlanetSituation, planet: Planet) {
     planet.situation = situation
@@ -84,7 +84,7 @@ function promptValidPlanet(callbackfn: (planet: Planet) => void) {
     const planetName= prompt('Informe o nome do planeta')
     const planet = findPlanet(planetName)
 
-    if (planet === null) {
+    if (planet) {
         callbackfn(planet)
     } else { alert("Planeta não encontrado") }
 }
