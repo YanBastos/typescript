@@ -77,6 +77,7 @@ function promptValidSituation() {
                 break;
         }
     }
+    return situation
 }
 
 
@@ -92,7 +93,7 @@ function promptValidPlanet(callback: (planet: Planet) => void) {
 }
 
 function firstMenuOption() {
-    const name = prompt('informe o nome do planeta:')
+    const name = prompt('informe o nome do planeta:') 
     const coordinateA = Number(prompt('Informe a primeira coordenada:'))
     const coordinateB = Number(prompt('Informe a segunda coordenada:'))
     const coordinateC = Number(prompt('Informe a terceira coordenada:'))
@@ -104,7 +105,29 @@ function firstMenuOption() {
     Coordenadas: (${coordinateA}, ${coordinateB}, ${coordinateC}, ${coordinateD})
     Situação: ${situation}`)
 
-    if(confirmation) {
+    if (confirmation) {
         addPlanet(name, [coordinateA, coordinateB, coordinateC, coordinateD], situation)
     }
 }
+
+function secondMenuOption() {
+
+    promptValidPlanet(planet => {
+        const situation = promptValidSituation()
+        updateSituation(situation, planet)
+    })
+}
+
+function thirdMenuOption(){
+    promptValidPlanet(planet=>{
+        const satellite = prompt('informe o nome do satélite a ser adicionado:')
+        addSatellite(satellite, planet)
+    })
+}
+
+function fourthMenuOption() {
+    promptValidPlanet(planet => {
+      const satellite = prompt('Informe o nome do satélite a ser removido:')
+      removeSatellite(satellite, planet)
+    })
+  }
