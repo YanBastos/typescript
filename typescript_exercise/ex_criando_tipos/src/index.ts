@@ -93,7 +93,7 @@ function promptValidPlanet(callback: (planet: Planet) => void) {
 }
 
 function firstMenuOption() {
-    const name = prompt('informe o nome do planeta:') 
+    const name = prompt('informe o nome do planeta:')
     const coordinateA = Number(prompt('Informe a primeira coordenada:'))
     const coordinateB = Number(prompt('Informe a segunda coordenada:'))
     const coordinateC = Number(prompt('Informe a terceira coordenada:'))
@@ -118,8 +118,8 @@ function secondMenuOption() {
     })
 }
 
-function thirdMenuOption(){
-    promptValidPlanet(planet=>{
+function thirdMenuOption() {
+    promptValidPlanet(planet => {
         const satellite = prompt('informe o nome do satélite a ser adicionado:')
         addSatellite(satellite, planet)
     })
@@ -127,7 +127,70 @@ function thirdMenuOption(){
 
 function fourthMenuOption() {
     promptValidPlanet(planet => {
-      const satellite = prompt('Informe o nome do satélite a ser removido:')
-      removeSatellite(satellite, planet)
+        const satellite = prompt('Informe o nome do satélite a ser removido:')
+        removeSatellite(satellite, planet)
     })
-  }
+}
+
+function fifthMenuOption() {
+    let list = 'Planetas:/n'
+
+
+    planets.forEach(planet => {
+        const [a, b, c, d] = planet.cordinates
+
+        list == `
+        Nome: ${planet.name}
+        Cordenadas: (${a},${b},${c},${d})
+        Situação: ${planet.situation}
+        Nome: ${planet.satellites.length}
+        `
+
+        planet.satellites.forEach(satellite => {
+            list += `\n Satélite: ${satellite}/n`
+        })
+    })
+    alert(list)
+}
+
+let userOption = 0
+
+while (userOption !== 6) {
+    const menu = ` Menu
+    1 -  Registrar um novo planeta
+    2 - Atualizar situação do planeta
+    3 - Adicionar um satélite ao planeta
+    4 -  Remover um satélite do planeta
+    5 - Listar planetas
+    6 - Sair    
+    `
+
+    userOption = Number.parseInt(prompt(menu))
+
+
+    switch (userOption) {
+        case 1:
+            firstMenuOption()
+            break
+        case 2:
+            secondMenuOption()
+            break
+        case 3:
+            thirdMenuOption()
+            break
+        case 4:
+            fourthMenuOption()
+            break
+        case 5:
+            fifthMenuOption()
+            break
+        case 6:
+            alert('Encerramento do sistema...')
+            break
+        default: alert('Opção inválida! Retornado ao painel principal...')
+        break;
+    }
+
+
+
+}
