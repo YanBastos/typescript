@@ -83,7 +83,7 @@ function promptValidSituation() {
 
 function promptValidPlanet(callback: (planet: Planet) => void) {
     const planetName = prompt('Informe o nome do planeta:')
-    const planet = findPlanet(planetName)
+    const planet = findPlanet(planetName) //erro
 
     if (planet) {
         callback(planet)
@@ -106,7 +106,7 @@ function firstMenuOption() {
     Situação: ${situation}`)
 
     if (confirmation) {
-        addPlanet(name, [coordinateA, coordinateB, coordinateC, coordinateD], situation)
+        addPlanet(name, [coordinateA, coordinateB, coordinateC, coordinateD], situation) //erro
     }
 }
 
@@ -121,14 +121,14 @@ function secondMenuOption() {
 function thirdMenuOption() {
     promptValidPlanet(planet => {
         const satellite = prompt('informe o nome do satélite a ser adicionado:')
-        addSatellite(satellite, planet)
+        addSatellite(satellite, planet) //erro
     })
 }
 
 function fourthMenuOption() {
     promptValidPlanet(planet => {
         const satellite = prompt('Informe o nome do satélite a ser removido:')
-        removeSatellite(satellite, planet)
+        removeSatellite(satellite, planet) //erro
     })
 }
 
@@ -153,9 +153,9 @@ function fifthMenuOption() {
     alert(list)
 }
 
-let userOption = 0
+let userOption: string | null = "0"
 
-while (userOption !== 6) {
+while (userOption !== "6") {
     const menu = ` Menu
     1 -  Registrar um novo planeta
     2 - Atualizar situação do planeta
@@ -165,32 +165,36 @@ while (userOption !== 6) {
     6 - Sair    
     `
 
-    userOption = Number.parseInt(prompt(menu))
+    // userOption = Number.parseInt(prompt(menu)) // erro
 
+    const userInput = prompt(menu);
 
-    switch (userOption) {
-        case 1:
-            firstMenuOption()
-            break
-        case 2:
-            secondMenuOption()
-            break
-        case 3:
-            thirdMenuOption()
-            break
-        case 4:
-            fourthMenuOption()
-            break
-        case 5:
-            fifthMenuOption()
-            break
-        case 6:
-            alert('Encerramento do sistema...')
-            break
-        default: alert('Opção inválida! Retornado ao painel principal...')
-        break;
+    if (userInput !== null) {
+        userOption = userInput.trim(); 
+    } else {
+        userOption = "6";
+
+        switch (userOption) {
+            case "1":
+                firstMenuOption()
+                break
+            case "2":
+                secondMenuOption()
+                break
+            case "3":
+                thirdMenuOption()
+                break
+            case "4":
+                fourthMenuOption()
+                break
+            case "5":
+                fifthMenuOption()
+                break
+            case "6":
+                alert('Encerramento do sistema...')
+                break
+            default: alert('Opção inválida! Retornado ao painel principal...')
+                break;
+        }
     }
-
-
-
 }
