@@ -49,57 +49,80 @@ function removeSatellite(name: string, planet: Planet) {
 
 
 function promptValidSituation() {
-    let situation: PlanetSituation
-    let validSituation = false
+    let situation: PlanetSituation | null = null; // Inicialize com null
+
+    let validSituation = false;
 
     while (!validSituation) {
-        const situationInput = prompt('Informe a situação do planeta?\n1 - Habitado\n2 - Habitável\n3 - Inabitável\n4 - Inexplorado')
+        const situationInput = prompt('Informe a situação do planeta?\n1 - Habitado\n2 - Habitável\n3 - Inabitável\n4 - Inexplorado');
 
         switch (situationInput) {
             case '1':
-                situation = 'Habitado'
-                validSituation = true
+                situation = 'Habitado';
+                validSituation = true;
                 break;
             case '2':
-                situation = 'Habitavel'
-                validSituation = true
+                situation = 'Habitavel';
+                validSituation = true;
                 break;
             case '3':
-                situation = 'Inabitavel'
-                validSituation = true
+                situation = 'Inabitavel';
+                validSituation = true;
                 break;
             case '4':
-                situation = 'Inexplorado'
-                validSituation = true
+                situation = 'Inexplorado';
+                validSituation = true;
                 break;
             default:
-                alert('Situação inválida!')
+                alert('Situação inválida!');
                 break;
         }
     }
-    return situation
+
+    // Verifica se situation não é null antes de retornar
+    if (situation !== null) {
+        return situation;
+    } else {
+        throw new Error('Situação inválida!'); // Lança um erro se situation for null
+    }
 }
 
 
 function promptValidPlanet(callback: (planet: Planet) => void) {
     const planetName = prompt('Informe o nome do planeta:')
-    const planet = findPlanet(planetName) //erro
 
-    if (planet) {
-        callback(planet)
+    if (planetName !== null) {
+        const planet = findPlanet(planetName) //erro
+
+        if (planet) {
+            callback(planet)
+        } else {
+            alert('Planeta não encontrado! Retornando ao menu...')
+        }
     } else {
-        alert('Planeta não encontrado! Retornando ao menu...')
+        alert(' Entrada inválida')
     }
+
 }
 
 function firstMenuOption() {
-    const name = prompt('informe o nome do planeta:')
-    const coordinateA = Number(prompt('Informe a primeira coordenada:'))
-    const coordinateB = Number(prompt('Informe a segunda coordenada:'))
-    const coordinateC = Number(prompt('Informe a terceira coordenada:'))
-    const coordinateD = Number(prompt('Informe a quarta coordenada:'))
+    const name = prompt('Informe o nome do planeta:');
+    if (name === null || name === undefined) return;
 
-    const situation = promptValidSituation()
+    const coordinateA = Number(prompt('Informe a primeira coordenada:'));
+    if (isNaN(coordinateA)) return;
+
+    const coordinateB = Number(prompt('Informe a segunda coordenada:'));
+    if (isNaN(coordinateB)) return;
+
+    const coordinateC = Number(prompt('Informe a terceira coordenada:'));
+    if (isNaN(coordinateC)) return;
+
+    const coordinateD = Number(prompt('Informe a quarta coordenada:'));
+    if (isNaN(coordinateD)) return;
+
+    const situation = promptValidSituation();
+    if (situation === null || situation === undefined) return;
 
     const confirmation = confirm(`Confirma o registro do planeta ${name}?
     Coordenadas: (${coordinateA}, ${coordinateB}, ${coordinateC}, ${coordinateD})
@@ -170,7 +193,7 @@ while (userOption !== "6") {
     const userInput = prompt(menu);
 
     if (userInput !== null) {
-        userOption = userInput.trim(); 
+        userOption = userInput.trim();
     } else {
         userOption = "6";
 
