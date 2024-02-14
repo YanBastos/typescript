@@ -143,17 +143,26 @@ function secondMenuOption() {
 
 function thirdMenuOption() {
     promptValidPlanet(planet => {
-        const satellite = prompt('informe o nome do satélite a ser adicionado:')
-        addSatellite(satellite, planet) //erro
-    })
+        const satellite = prompt('informe o nome do satélite a ser adicionado:');
+        if (satellite !== null) { // Verifica se satellite não é null
+            addSatellite(satellite, planet);
+        } else {
+            alert('Entrada inválida! Retornando ao menu...');
+        }
+    });
 }
 
 function fourthMenuOption() {
     promptValidPlanet(planet => {
-        const satellite = prompt('Informe o nome do satélite a ser removido:')
-        removeSatellite(satellite, planet) //erro
-    })
+        const satellite = prompt('Informe o nome do satélite a ser removido:');
+        if (satellite !== null) { // Verifica se satellite não é null
+            removeSatellite(satellite, planet);
+        } else {
+            alert('Entrada inválida! Retornando ao menu...');
+        }
+    });
 }
+
 
 function fifthMenuOption() {
     let list = 'Planetas:/n'
