@@ -26,3 +26,21 @@ let sun: Star = {
     planets: []
 }
 
+// classes podem implementar interfaces
+// nesse caso ela cria o que chamamos de contrato,
+//pois obriga a classe a implementar tudo o que
+// foi definido na interface
+class MilkWayPlanet implements Planet {
+    // em typescript precisamos explicitar os atributos da classe dessa forma
+    name: string
+    mass: number;
+    population: number;
+
+    constructor(name: string, mass: number, population: number) {
+        this.name = name
+        this.mass = mass
+        this.population = population
+    }
+    createrSatellite!: (name: string) => void
+}
+
