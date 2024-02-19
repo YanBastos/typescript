@@ -26,12 +26,12 @@ let sun: Star = {
     planets: []
 }
 
-// classes podem implementar interfaces
-// nesse caso ela cria o que chamamos de contrato,
-// pois obriga a classe a implementar tudo o que
-// foi definido na interface
+// classes can implement interfaces
+// in this case, it creates what we call a contract
+// as it forces the class to implement everything that
+// was defined in the interface
 class MilkWayPlanet implements Planet {
-    // em typescript precisamos explicitar os atributos da classe dessa forma
+    // in typescript, we nedd to explicitly declare class attributes in this way
     name: string
     mass: number;
     population: number;
@@ -41,16 +41,17 @@ class MilkWayPlanet implements Planet {
         this.mass = mass
         this.population = population
     }
+    orbitedStar!: Star
     createrSatellite!: (name: string) => void
 }
 
-// Aliases também podem usar heranças mas co uma 
-// sintaxe um pouco diferente
+// Aliases can also use inheritance, but with a 
+// slightly different syntax
 type Asteroid = CelestialBody & {
     size: number
 }
 
-// O mesmo é válido para implementação usando Type de objeto
+// The same is valid for implemantation using object type
 class BigAsteroid implements Asteroid {
     name: string
     mass: number
@@ -62,11 +63,10 @@ class BigAsteroid implements Asteroid {
         this.size = s
     }
 }
+// Although few, there are differences between type and interfaces
 
-// Apesar de serem poucas, existem diferenças entre type e interfaces
-
-// Uma delas é a possibilidade de adicionar mais
-// propriedades definindo novamente a mesma interface
+// One of them is the possibility of adding more 
+// properties by redefining the same interface
 interface Planet {
     orbitedStar: Star
 }
